@@ -6,27 +6,34 @@ namespace Tyuiu.MamatkulovFO.Sprint6.Task1.V7.Lib
     {
         public double[] GetMassFunction(int startValue, int stopValue)
         {
-            int size = stopValue - startValue + 1;
-            double[] result = new double[size];
+          
+            int count = stopValue - startValue + 1;
+            double[] results = new double[count];
+            int index = 0;
 
-            for (int i = 0; i < size; i++)
+            for (int x = startValue; x <= stopValue; x++)
             {
-                int x = startValue + i;
                 double denominator = Math.Cos(x) + x;
 
+              
                 if (Math.Abs(denominator) < 1e-10)
-                    result[i] = 0;
+                {
+                    results[index] = 0.0;
+                }
                 else
-                    result[i] = (2 * x - 3) / denominator + 5;
+                {
+                    double numerator = 2 * x - 3;
+                    double result = numerator / denominator + 5;
+                    results[index] = Math.Round(result, 2); 
+                }
+
+                index++;
             }
 
-            return result;
-        }
-
-        double[] ISprint6Task1V7.GetMassFunction(int startValue, int stopValue)
-        {
-            throw new NotImplementedException();
+            return results;
         }
     }
 }
+    
+
 
