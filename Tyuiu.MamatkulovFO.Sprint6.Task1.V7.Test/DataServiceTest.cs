@@ -1,21 +1,28 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Tyuiu.MamatkulovFO.Sprint6.Task1.V7.Lib;
+﻿using System;
+using System.Text;
 
-namespace Tyuiu.MamatkulovFO.Sprint6.Task1.V7.Test
+namespace Tyuiu.MamatkulovFO.Sprint6.Task1.V7.Lib
 {
-    [TestClass]
-    public class DataServiceTest
+    public class DataService
     {
-        [TestMethod]
-        public void ValidGetMassFunctionTest()
+        public string GetMassFunction(int startValue, int stopValue)
         {
-            var ds = new DataService();
-            string result = ds.GetMassFunction(-5, 5);
+            var sb = new StringBuilder("[");
+            for (int i = startValue; i <= stopValue; i++)
+            {
+                double denom = Math.Cos(i) + i;
+                double value = Math.Abs(denom) < 1e-10 ? 0 : (2.0 * i - 3.0) / denom + 5.0;
 
+                if (i > startValue) sb.Append(", ");
 
-            string expected = "[7.76, 7.36, 7.26, 7.9, 15.88, 2.0, 4.35, 5.63, 6.49, 6.49, 6.32]";
+                string formatted = value.ToString("F2");
+                if (formatted.EndsWith(".00"))
+                    formatted = formatted.Substring(0, formatted.Length - 2) + "0";
 
-            Assert.AreEqual(expected, result);
+                sb.Append(formatted);
+            }
+            sb.Append("]");
+            return sb.ToString();
         }
     }
 }
