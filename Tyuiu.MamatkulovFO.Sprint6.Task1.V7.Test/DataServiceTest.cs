@@ -10,9 +10,12 @@ namespace Tyuiu.MamatkulovFO.Sprint6.Task1.V7.Test
         public void ValidGetMassFunctionTest()
         {
             var ds = new DataService();
-            var res = ds.GetMassFunction(-5, 5);
-            Assert.AreEqual(11, res.Length);
-            Assert.AreEqual(2.0, res[5], 0.01); 
+            string result = ds.GetMassFunction(-5, 5);
+
+          
+            string expected = "[7.76, 7.36, 7.26, 7.90, 15.88, 2.00, 0.43, 5.63, 6.49, 6.49, 6.32]";
+
+            Assert.AreEqual(expected, result);
         }
     }
 }

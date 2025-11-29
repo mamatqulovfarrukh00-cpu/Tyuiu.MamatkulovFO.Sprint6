@@ -1,25 +1,30 @@
-﻿using tyuiu.cources.programming.interfaces.Sprint6;
+﻿using System.Text;
+using tyuiu.cources.programming.interfaces.Sprint6;
 namespace Tyuiu.MamatkulovFO.Sprint6.Task1.V7.Lib
 {
     public class DataService : ISprint6Task1V7
     {
-        public double[] GetMassFunction(int startValue, int stopValue)
+        public string GetMassFunction(int startValue, int stopValue)
         {
-            int size = stopValue - startValue + 1;
-            double[] result = new double[size];
+            var sb = new StringBuilder();
+            sb.Append("[");
 
-            for (int i = 0; i < size; i++)
+            for (int i = startValue; i <= stopValue; i++)
             {
-                int x = startValue + i;
-                double denominator = Math.Cos(x) + x;
+                double denom = Math.Cos(i) + i;
+                double value = Math.Abs(denom) < 1e-10 ? 0 : (2 * i - 3) / denom + 5;
 
-                if (Math.Abs(denominator) < 1e-10) 
-                    result[i] = 0;
-                else
-                    result[i] = (2 * x - 3) / denominator + 5;
+                if (i > startValue) sb.Append(", ");
+                sb.Append(value.ToString("F2"));
             }
 
-            return result;
+            sb.Append("]");
+            return sb.ToString();
+        }
+
+        double[] ISprint6Task1V7.GetMassFunction(int startValue, int stopValue)
+        {
+            throw new NotImplementedException();
         }
     }
 }
