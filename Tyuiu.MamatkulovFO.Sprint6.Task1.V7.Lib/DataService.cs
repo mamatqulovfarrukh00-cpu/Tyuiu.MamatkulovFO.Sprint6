@@ -15,7 +15,7 @@ namespace Tyuiu.MamatkulovFO.Sprint6.Task1.V7.Lib
                 double value = Math.Abs(denom) < 1e-10 ? 0 : (2 * i - 3) / denom + 5;
 
                 if (i > startValue) sb.Append(", ");
-                sb.Append(value.ToString("F2"));
+                sb.Append(value.ToString("0.##")); // <-- Bu yerda tuzatildi!
             }
 
             sb.Append("]");
