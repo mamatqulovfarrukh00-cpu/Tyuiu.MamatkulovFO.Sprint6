@@ -9,14 +9,10 @@ namespace Tyuiu.MamatkulovFO.Sprint6.Task1.V7.Test
         [TestMethod]
         public void ValidGetMassFunctionTest()
         {
-            var service = new DataService();
-            double[] values = service.GetMassFunction(-5, 5);
-
-            Assert.IsNotNull(values);
-            Assert.AreEqual(11, values.Length);
-
-           
-            Assert.AreEqual(2.0, values[5], 0.01); 
+            var ds = new DataService();
+            var res = ds.GetMassFunction(-5, 5);
+            Assert.AreEqual(11, res.Length);
+            Assert.AreEqual(2.0, res[5], 0.01); 
         }
     }
 }
