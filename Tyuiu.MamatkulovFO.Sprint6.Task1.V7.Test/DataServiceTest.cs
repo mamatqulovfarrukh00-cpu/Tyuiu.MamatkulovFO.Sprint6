@@ -1,28 +1,22 @@
-﻿using System;
-using System.Text;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Tyuiu.MamatkulovFO.Sprint6.Task1.V7.Lib;
 
-namespace Tyuiu.MamatkulovFO.Sprint6.Task1.V7.Lib
+namespace Tyuiu.MamatkulovFO.Sprint6.Task1.V7.Test
 {
-    public class DataService
+    [TestClass]
+    public class DataServiceTest
     {
-        public string GetMassFunction(int startValue, int stopValue)
+        [TestMethod]
+        public void ValidGetMassFunctionTest()
         {
-            var sb = new StringBuilder("[");
-            for (int i = startValue; i <= stopValue; i++)
-            {
-                double denom = Math.Cos(i) + i;
-                double value = Math.Abs(denom) < 1e-10 ? 0 : (2.0 * i - 3.0) / denom + 5.0;
+            var service = new DataService();
+            double[] values = service.GetMassFunction(-5, 5);
 
-                if (i > startValue) sb.Append(", ");
+            Assert.IsNotNull(values);
+            Assert.AreEqual(11, values.Length);
 
-                string formatted = value.ToString("F2");
-                if (formatted.EndsWith(".00"))
-                    formatted = formatted.Substring(0, formatted.Length - 2) + "0";
-
-                sb.Append(formatted);
-            }
-            sb.Append("]");
-            return sb.ToString();
+            // Masalan, x=0 da: (2*0-3)/(cos(0)+0) + 5 = (-3)/1 + 5 = 2
+            Assert.AreEqual(2.0, values[5], 0.01); // x=0 -> index 5
         }
     }
 }

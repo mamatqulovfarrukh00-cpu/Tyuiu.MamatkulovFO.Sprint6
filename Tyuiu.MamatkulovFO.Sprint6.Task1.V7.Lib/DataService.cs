@@ -4,23 +4,23 @@ namespace Tyuiu.MamatkulovFO.Sprint6.Task1.V7.Lib
 {
     public class DataService : ISprint6Task1V7
     {
-        public string GetMassFunction(int startValue, int stopValue)
+        public double[] GetMassFunction(int startValue, int stopValue)
         {
-            var sb = new StringBuilder("[");
-            for (int i = startValue; i <= stopValue; i++)
+            int size = stopValue - startValue + 1;
+            double[] result = new double[size];
+
+            for (int i = 0; i < size; i++)
             {
-                double denom = Math.Cos(i) + i;
-                double value = Math.Abs(denom) < 1e-10 ? 0 : (2.0 * i - 3.0) / denom + 5.0;
+                int x = startValue + i;
+                double denominator = Math.Cos(x) + x;
 
-                if (i > startValue) sb.Append(", ");
-
-                string formatted = value.ToString("F2").TrimEnd('0').TrimEnd('.');
-                if (!formatted.Contains('.')) formatted += ".0";
-
-                sb.Append(formatted);
+                if (Math.Abs(denominator) < 1e-10)
+                    result[i] = 0;
+                else
+                    result[i] = (2 * x - 3) / denominator + 5;
             }
-            sb.Append("]");
-            return sb.ToString();
+
+            return result;
         }
 
         double[] ISprint6Task1V7.GetMassFunction(int startValue, int stopValue)

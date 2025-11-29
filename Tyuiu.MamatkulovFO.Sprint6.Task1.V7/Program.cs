@@ -5,29 +5,42 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace Tyuiu.MamatkulovFO.Sprint6.Task1.V7
 {
-    class P
+    static class Program
     {
-        public static object DockStyle { get; private set; }
+        private static object DockStyle;
 
         [STAThread]
         static void Main()
         {
-            var f = new Form();
-            var t = new TextBox { Multiline = true, Dock = DockStyle };
-            var b = new Button { Text = "Hisoblash", Dock = DockStyle };
+           
 
-            b.Click += (_, __) =>
+            var form = new Form { Text = "V7", Width = 400, Height = 300 };
+            var textBox = new TextBox
             {
-                var r = new DataService().GetMassFunction(-5, 5);
-                for (int i = -5; i <= 5; i++)
-                {
-                    double val = r[i + 5];
-                    string formatted = val.ToString("F2").TrimEnd('0').TrimEnd(',');
-                    t.AppendText($"F({i}) = {formatted}\n");
-                }
+               
             };
 
-           
+            var button = new Button { Text = "Hisoblash", Dock = DockStyle };
+
+            button.Click += (_, __) =>
+            {
+                var ds = new DataService();
+                double[] results = ds.GetMassFunction(-5, 5);
+
+                // Natijani massiv sifatida formatlab chiqaramiz: [7,76, 7,36, ...]
+                string output = "[";
+                for (int i = 0; i < results.Length; i++)
+                {
+                    double val = results[i];
+                    string formatted = val.ToString("F2").TrimEnd('0').TrimEnd(',');
+                    if (i > 0) output += ", ";
+                    output += formatted;
+                }
+                output += "]";
+
+                textBox.Text = output;
+            };
+
         }
     }
 }
