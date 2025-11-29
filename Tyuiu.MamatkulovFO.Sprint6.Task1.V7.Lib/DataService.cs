@@ -6,18 +6,24 @@ namespace Tyuiu.MamatkulovFO.Sprint6.Task1.V7.Lib
     {
         public string GetMassFunction(int startValue, int stopValue)
         {
-            var sb = new StringBuilder();
-            sb.Append("[");
-
+            var sb = new StringBuilder("[");
             for (int i = startValue; i <= stopValue; i++)
             {
                 double denom = Math.Cos(i) + i;
-                double value = Math.Abs(denom) < 1e-10 ? 0 : (2 * i - 3) / denom + 5;
+                double value;
+
+                if (Math.Abs(denom) < 1e-10)
+                    value = 0;
+                else
+                    value = (2.0 * i - 3.0) / denom + 5.0; // TO'G'RI FORMULA
+
+                // Format: 7.9, 2.0, 4.35 kabi
+                string formatted = value.ToString("0.00").TrimEnd('0').TrimEnd('.');
+                if (!formatted.Contains(".")) formatted += ".0";
 
                 if (i > startValue) sb.Append(", ");
-                sb.Append(value.ToString("0.##")); // <-- Bu yerda tuzatildi!
+                sb.Append(formatted);
             }
-
             sb.Append("]");
             return sb.ToString();
         }
