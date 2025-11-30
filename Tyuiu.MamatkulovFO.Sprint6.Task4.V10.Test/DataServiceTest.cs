@@ -1,19 +1,19 @@
-﻿using System;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Tyuiu.MamatkulovFO.Sprint6.Task4.V10.Lib;
-namespace Tyuiu.MamatkulovFO.Sprint6.Task4.V10.Test;
 
-public class DataServiceTest
+namespace Tyuiu.MamatkulovFO.Sprint6.Task4.V10.Test
 {
-    public static void Run()
+    [TestClass]
+    public class DataServiceTest
     {
-        var service = new DataService();
-        double[] values = service.GetMassFunction(-5, 5);
-
-        Console.WriteLine("x\tF(x)");
-        for (int i = 0; i < values.Length; i++)
+        [TestMethod]
+        public void TestMethod_GetMassFunction()
         {
-            int x = -5 + i;
-            Console.WriteLine($"{x}\t{values[i]:F2}");
+            var service = new DataService();
+            var result = service.GetMassFunction(-5, 5);
+
+            Assert.IsNotNull(result);
+            
         }
     }
 }
