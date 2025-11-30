@@ -12,7 +12,7 @@ namespace Tyuiu.MamatkulovFO.Sprint6.Task5.V10.Lib
             {
                 if (!string.IsNullOrWhiteSpace(line))
                 {
-                    string cleanLine = line.Replace(',', '.').Trim();
+                    string cleanLine = line.Trim().Replace(',', '.');
                     if (double.TryParse(cleanLine, out double value))
                     {
                         list.Add(value);
@@ -37,5 +37,7 @@ namespace Tyuiu.MamatkulovFO.Sprint6.Task5.V10.Lib
         }
     }
 }
+    
+
     
 

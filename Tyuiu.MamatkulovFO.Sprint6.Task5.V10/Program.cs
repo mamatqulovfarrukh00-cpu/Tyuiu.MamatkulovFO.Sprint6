@@ -1,5 +1,4 @@
 ﻿using System;
-
 using Tyuiu.MamatkulovFO.Sprint6.Task5.V10.Lib;
 
 namespace Tyuiu.MamatkulovFO.Sprint6.Task5.V10
