@@ -7,19 +7,15 @@ namespace Tyuiu.MamatkulovFO.Sprint6.Task5.V10.Lib
         {
             string[] lines = File.ReadAllLines(path);
             var list = new System.Collections.Generic.List<double>();
-
             foreach (string line in lines)
             {
                 if (!string.IsNullOrWhiteSpace(line))
                 {
-                    string cleanLine = line.Trim().Replace(',', '.');
-                    if (double.TryParse(cleanLine, out double value))
-                    {
-                        list.Add(value);
-                    }
+                    string clean = line.Trim().Replace(',', '.');
+                    if (double.TryParse(clean, out double v))
+                        list.Add(v);
                 }
             }
-
             return list.ToArray();
         }
 
@@ -27,17 +23,9 @@ namespace Tyuiu.MamatkulovFO.Sprint6.Task5.V10.Lib
         {
             var filtered = new System.Collections.Generic.List<double>();
             foreach (double d in data)
-            {
                 if (Math.Abs(d) > 1e-10)
-                {
                     filtered.Add(d);
-                }
-            }
             return filtered.ToArray();
         }
     }
 }
-    
-
-    
-
