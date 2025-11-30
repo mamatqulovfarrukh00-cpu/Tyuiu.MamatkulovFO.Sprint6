@@ -7,15 +7,13 @@ namespace Tyuiu.MamatkulovFO.Sprint6.Task5.V10.Test
     public class DataServiceTest
     {
         [TestMethod]
-        public void TestMethod_LoadAndFilter()
+        public void LoadAndFilter_Returns20NonZeroValues()
         {
             var service = new DataService();
-            double[] data = service.LoadFromDataFile("InPutDataFileTask5V10.txt");
-            Assert.IsNotNull(data);
-            Assert.IsTrue(data.Length >= 20); 
+            var data = service.LoadFromDataFile("Sprint6Task/InPutDataFileTask5V10.txt");
+            var result = service.FilterNonZero(data);
 
-            double[] filtered = service.FilterNonZero(data);
-            Assert.IsTrue(filtered.Length == 20); 
+            Assert.AreEqual(20, result.Length);
         }
     }
 }

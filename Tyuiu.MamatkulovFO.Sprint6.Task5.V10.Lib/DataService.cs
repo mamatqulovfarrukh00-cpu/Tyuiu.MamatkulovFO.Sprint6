@@ -5,8 +5,8 @@ namespace Tyuiu.MamatkulovFO.Sprint6.Task5.V10.Lib
     {
         public double[] LoadFromDataFile(string path)
         {
-            string[] lines = File.ReadAllLines(path);
-            var list = new System.Collections.Generic.List<double>();
+            
+            
 
             foreach (string line in lines)
             {
