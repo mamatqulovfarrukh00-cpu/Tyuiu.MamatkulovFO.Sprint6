@@ -14,7 +14,7 @@ namespace Tyuiu.MamatkulovFO.Sprint6.Task6.V16
         [STAThread]
         static void Main()
         {
-          
+
 
             var ofd = new OpenFileDialog { Filter = "Text files|*.txt" };
             if (ofd.ShowDialog() == DialogResult)
