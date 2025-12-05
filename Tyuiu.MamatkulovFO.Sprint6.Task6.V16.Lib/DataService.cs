@@ -11,6 +11,7 @@ public class DataService : ISprint6Task6V16
         var text = File.ReadAllText(path);
         var words = text.Split(new char[] { ' ', '\n', '\r', '\t' }, StringSplitOptions.RemoveEmptyEntries);
 
+       
         var resultWords = words.Where(word => word.Contains('b') || word.Contains('B')).ToArray();
 
         return string.Join(" ", resultWords);
