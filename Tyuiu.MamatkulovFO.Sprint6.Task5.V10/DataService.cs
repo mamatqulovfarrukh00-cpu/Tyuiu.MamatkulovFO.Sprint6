@@ -1,5 +1,5 @@
 ﻿
-namespace Tyuiu.MamatkulovFO.Sprint6.Task4.V10.Test
+namespace Tyuiu.MamatkulovFO.Sprint6.Task5.V10
 {
     internal class DataService
     {
@@ -7,7 +7,7 @@ namespace Tyuiu.MamatkulovFO.Sprint6.Task4.V10.Test
         {
         }
 
-        internal object GetMassFunction(int v1, int v2)
+        internal double[] LoadFromDataFile(string filePath)
         {
             throw new NotImplementedException();
         }
