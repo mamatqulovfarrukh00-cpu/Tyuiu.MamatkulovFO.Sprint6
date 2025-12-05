@@ -16,16 +16,18 @@ namespace Tyuiu.MamatkulovFO.Sprint6.Task5.V10.Lib
 
             foreach (var line in lines)
             {
+                // Vergul bilan ajratilgan sonlarni ajratamiz
                 var parts = line.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
 
                 foreach (var part in parts)
                 {
-                    string cleanedPart = part.Trim().Replace(',', '.'); 
+                    string cleanedPart = part.Trim().Replace(',', '.'); // Vergulni nuqtaga almashtirish
+
                     if (double.TryParse(cleanedPart, out double number))
                     {
-                        if (number != 0) 
+                        if (number != 0) // Faqat nolga teng bo'lmaganlar
                         {
-                            result.Add(number); 
+                            result.Add(number); // ❗️ YAXLITLAMAYMIZ!
                         }
                     }
                 }
