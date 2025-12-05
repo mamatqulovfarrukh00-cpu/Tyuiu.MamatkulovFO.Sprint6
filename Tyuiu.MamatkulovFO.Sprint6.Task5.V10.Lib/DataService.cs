@@ -16,7 +16,10 @@ namespace Tyuiu.MamatkulovFO.Sprint6.Task5.V10.Lib
 
             foreach (var line in lines)
             {
-                if (double.TryParse(line.Replace(',', '.'), out double number))
+                // Заменяем запятую на точку
+                string cleanedLine = line.Trim().Replace(',', '.');
+
+                if (double.TryParse(cleanedLine, out double number))
                 {
                     if (number != 0) // Ненулевые числа
                         result.Add(Math.Round(number, 3)); // Округляем до 3 знаков
