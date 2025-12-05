@@ -11,24 +11,25 @@ namespace Tyuiu.MamatkulovFO.Sprint6.Task5.V10.Lib
             if (!File.Exists(path))
                 throw new FileNotFoundException("Файл не найден!", path);
 
-            var lines = File.ReadAllLines(path);
+            string content = File.ReadAllText(path);
             var result = new List<double>();
 
-            foreach (var line in lines)
+            // Barcha qatorlarni bitta qatorga birlashtiramiz (agar kerak bo'lsa)
+            string[] numbers = content.Replace("\r", "").Split(new char[] { ',', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+
+            foreach (string raw in numbers)
             {
-                // Vergul bilan ajratilgan sonlarni ajratamiz
-                var parts = line.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+                string trimmed = raw.Trim();
+                if (string.IsNullOrEmpty(trimmed)) continue;
 
-                foreach (var part in parts)
+                // Vergulni nuqtaga almashtiramiz (agar faylda 11,49 bo'lsa)
+                string normalized = trimmed.Replace(',', '.');
+
+                if (double.TryParse(normalized, out double value))
                 {
-                    string cleanedPart = part.Trim().Replace(',', '.'); // Vergulni nuqtaga almashtirish
-
-                    if (double.TryParse(cleanedPart, out double number))
+                    if (value != 0.0)
                     {
-                        if (number != 0) // Faqat nolga teng bo'lmaganlar
-                        {
-                            result.Add(number); // ❗️ YAXLITLAMAYMIZ!
-                        }
+                        result.Add(value); 
                     }
                 }
             }
@@ -37,4 +38,3 @@ namespace Tyuiu.MamatkulovFO.Sprint6.Task5.V10.Lib
         }
     }
 }
-
