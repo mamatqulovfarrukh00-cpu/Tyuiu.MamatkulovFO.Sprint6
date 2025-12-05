@@ -11,13 +11,15 @@ namespace Tyuiu.MamatkulovFO.Sprint6.Task5.V10.Lib
             if (!File.Exists(path))
                 throw new FileNotFoundException("Файл не найден!", path);
 
-            var content = File.ReadAllText(path);
-            var result = new List<double>();
+            // Faylni butunlay o'qib, barcha sonlarni ajratamiz
+            string content = File.ReadAllText(path);
 
             // Vergul bilan ajratilgan barcha sonlarni ajratamiz
             var parts = content.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
 
-            foreach (var part in parts)
+            var result = new List<double>();
+
+            foreach (string part in parts)
             {
                 string cleaned = part.Trim().Replace(',', '.'); // Vergulni nuqtaga almashtirish
 
@@ -34,5 +36,3 @@ namespace Tyuiu.MamatkulovFO.Sprint6.Task5.V10.Lib
         }
     }
 }
-    
-
