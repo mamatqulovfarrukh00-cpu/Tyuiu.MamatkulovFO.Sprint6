@@ -16,13 +16,18 @@ namespace Tyuiu.MamatkulovFO.Sprint6.Task5.V10.Lib
 
             foreach (var line in lines)
             {
-                // Заменяем запятую на точку
-                string cleanedLine = line.Trim().Replace(',', '.');
+                var parts = line.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
 
-                if (double.TryParse(cleanedLine, out double number))
+                foreach (var part in parts)
                 {
-                    if (number != 0) // Ненулевые числа
-                        result.Add(Math.Round(number, 3)); // Округляем до 3 знаков
+                    string cleanedPart = part.Trim().Replace(',', '.'); 
+                    if (double.TryParse(cleanedPart, out double number))
+                    {
+                        if (number != 0) 
+                        {
+                            result.Add(number); 
+                        }
+                    }
                 }
             }
 
