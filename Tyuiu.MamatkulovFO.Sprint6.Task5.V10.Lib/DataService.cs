@@ -1,4 +1,7 @@
-﻿using tyuiu.cources.programming.interfaces.Sprint6;
+﻿using System;
+using System.IO;
+using System.Collections.Generic;
+using tyuiu.cources.programming.interfaces.Sprint6;
 namespace Tyuiu.MamatkulovFO.Sprint6.Task5.V10.Lib
 {
     public class DataService : ISprint6Task5V10
