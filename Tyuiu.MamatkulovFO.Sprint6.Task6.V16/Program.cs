@@ -1,34 +1,29 @@
-﻿using System;
-
-using Tyuiu.MamatkulovFO.Sprint6.Task6.V16.Lib;
-using static System.Net.Mime.MediaTypeNames;
+﻿using Tyuiu.MamatkulovFO.Sprint6.Task6.V16.Lib;
 
 namespace Tyuiu.MamatkulovFO.Sprint6.Task6.V16
 {
-    static class Program
+    internal class Program
     {
-        private static readonly object DialogResult;
-
-        public static object MessageBox { get; private set; }
-
-        [STAThread]
-        static void Main()
+        static void Main(string[] args)
         {
+            var service = new DataService();
 
+            // ✅ To'liq yo'l — shuni o'zgartiring!
+            string filePath = @"C:\Users\Фарух\source\repos\Tyuiu.MamatkulovFO.Sprint6.Task6.V16\Sprint6Task6\InPutDataFileTask6V16.txt";
 
-            var ofd = new OpenFileDialog { Filter = "Text files|*.txt" };
-            if (ofd.ShowDialog() == DialogResult)
+            try
             {
-                try
-                {
-                    var result = new DataService().GetWordsWithB(ofd.FileName);
-                    
-                }
-                catch (Exception ex)
-                {
-                  
-                }
+                string result = service.CollectTextFromFile(filePath);
+
+                Console.WriteLine("Слова с буквой 'b':");
+                Console.WriteLine(result);
             }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Ошибка: {ex.Message}");
+            }
+
+            Console.ReadKey();
         }
     }
 }

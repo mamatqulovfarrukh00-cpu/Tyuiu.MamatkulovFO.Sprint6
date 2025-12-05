@@ -8,6 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="Sprint6Task6\InPutDataFileTask6V16.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Tyuiu.MamatkulovFO.Sprint6.Task6.V16.Lib\Tyuiu.MamatkulovFO.Sprint6.Task6.V16.Lib.csproj" />
   </ItemGroup>
 
