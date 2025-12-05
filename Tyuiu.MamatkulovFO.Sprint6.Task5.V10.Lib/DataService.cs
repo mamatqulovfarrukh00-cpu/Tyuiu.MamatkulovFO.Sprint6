@@ -11,23 +11,24 @@ namespace Tyuiu.MamatkulovFO.Sprint6.Task5.V10.Lib
             if (!File.Exists(path))
                 throw new FileNotFoundException("Файл не найден!", path);
 
-            // Faylni butunlay o'qib, barcha sonlarni ajratamiz
-            string content = File.ReadAllText(path);
-
-            // Vergul bilan ajratilgan barcha sonlarni ajratamiz
-            var parts = content.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
-
+            var lines = File.ReadAllLines(path);
             var result = new List<double>();
 
-            foreach (string part in parts)
+            foreach (string line in lines)
             {
-                string cleaned = part.Trim().Replace(',', '.'); // Vergulni nuqtaga almashtirish
+                // Har bir qatorni vergul bilan ajratamiz
+                string[] parts = line.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
 
-                if (double.TryParse(cleaned, out double number))
+                foreach (string part in parts)
                 {
-                    if (number != 0.0) // Nolga teng bo'lmaganlarni ajratamiz
+                    string cleaned = part.Trim().Replace(',', '.'); // Vergulni nuqtaga almashtirish
+
+                    if (double.TryParse(cleaned, out double number))
                     {
-                        result.Add(number); // ❗️ YAXLITLAMAYMIZ!
+                        if (number != 0.0) // Nolga teng bo'lmaganlarni ajratamiz
+                        {
+                            result.Add(number); // ❗️ YAXLITLAMAYMIZ!
+                        }
                     }
                 }
             }
