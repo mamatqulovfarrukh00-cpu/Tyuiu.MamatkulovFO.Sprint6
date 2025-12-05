@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;          
+﻿
 using Tyuiu.MamatkulovFO.Sprint6.Task5.V10.Lib;
 
 namespace Tyuiu.MamatkulovFO.Sprint6.Task5.V10.Test
@@ -15,9 +14,9 @@ namespace Tyuiu.MamatkulovFO.Sprint6.Task5.V10.Test
 
             var result = service.LoadFromDataFile(path);
 
-            Assert.IsNotNull(result);
+            
             Assert.IsTrue(result.Length > 0);
-           
+            Assert.IsFalse(Array.Exists(result, x => x == 0));
         }
     }
 }

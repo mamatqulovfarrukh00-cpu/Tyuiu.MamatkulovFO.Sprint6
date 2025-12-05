@@ -5,39 +5,23 @@ namespace Tyuiu.MamatkulovFO.Sprint6.Task5.V10.Lib
     {
         public double[] LoadFromDataFile(string path)
         {
-            
-            
+            if (!File.Exists(path))
+                throw new FileNotFoundException("Файл не найден!", path);
 
-            foreach (string line in lines)
+            var lines = File.ReadAllLines(path);
+            var result = new List<double>();
+
+            foreach (var line in lines)
             {
-                if (!string.IsNullOrWhiteSpace(line))
+                if (double.TryParse(line.Replace(',', '.'), out double number))
                 {
-                    string cleanLine = line.Trim().Replace(',', '.');
-                    if (double.TryParse(cleanLine, out double value))
-                    {
-                        list.Add(value);
-                    }
+                    if (number != 0) // Ненулевые числа
+                        result.Add(Math.Round(number, 3)); // Округляем до 3 знаков
                 }
             }
 
-            return list.ToArray();
-        }
-
-        public double[] FilterNonZero(double[] data)
-        {
-            var filtered = new System.Collections.Generic.List<double>();
-            foreach (double d in data)
-            {
-                if (Math.Abs(d) > 1e-10)
-                {
-                    filtered.Add(d);
-                }
-            }
-            return filtered.ToArray();
+            return result.ToArray();
         }
     }
 }
-    
-
-    
 
