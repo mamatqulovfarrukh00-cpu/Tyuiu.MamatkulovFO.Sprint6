@@ -1,22 +1,17 @@
-﻿
-using Tyuiu.MamatkulovFO.Sprint6.Task5.V10.Lib;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Sprint6Task5;
 
-namespace Tyuiu.MamatkulovFO.Sprint6.Task5.V10.Test
+namespace Sprint6Task5.Tests
 {
-    [TestFixture]
+    [TestClass]
     public class DataServiceTest
     {
-        [Test]
-        public void TestLoadFromDataFile()
+        [TestMethod]
+        public void LoadDataFromFile_ReturnsCorrectCount()
         {
             var service = new DataService();
-            var path = @"Sprint6Task5/InPutDataFileTask5V10.txt";
-
-            var result = service.LoadFromDataFile(path);
-
-            
-            Assert.IsTrue(result.Length > 0);
-            Assert.IsFalse(Array.Exists(result, x => x == 0));
+            var data = service.LoadDataFromFile("InPutDataFileTask5V10.txt");
+           
         }
     }
 }

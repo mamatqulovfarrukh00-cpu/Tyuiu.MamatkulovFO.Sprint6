@@ -1,39 +1,32 @@
-﻿using System;
-using System.IO;
-using System.Collections.Generic;
+﻿using System.Globalization;
 using tyuiu.cources.programming.interfaces.Sprint6;
-namespace Tyuiu.MamatkulovFO.Sprint6.Task5.V10.Lib
+namespace Tyuiu.MamatkulovFO.Sprint6.Task5.V10.Lib;
+
+public class Dataservice : ISprint6Task5V10
 {
-    public class DataService : ISprint6Task5V10
+   
+
+    public double[] LoadFromDataFile(string path)
     {
-        public double[] LoadFromDataFile(string path)
+        if (!File.Exists(path))
+            throw new FileNotFoundException("Fayl topilmadi: " + path);
+
+        var numbers = new List<double>();
+        var lines = File.ReadAllLines(path);
+
+        foreach (var line in lines)
         {
-            if (!File.Exists(path))
-                throw new FileNotFoundException("Файл не найден!", path);
-
-            var lines = File.ReadAllLines(path);
-            var result = new List<double>();
-
-            foreach (string line in lines)
+            var clean = line.Trim().Replace('.', ','); // . → ,
+            if (double.TryParse(clean, NumberStyles.Float, CultureInfo.InvariantCulture, out double num))
             {
-                // Har bir qatorni vergul bilan ajratamiz
-                string[] parts = line.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
-
-                foreach (string part in parts)
+                if (num != 0)
                 {
-                    string cleaned = part.Trim().Replace(',', '.'); // Vergulni nuqtaga almashtirish
-
-                    if (double.TryParse(cleaned, out double number))
-                    {
-                        if (number != 0.0) // Nolga teng bo'lmaganlarni ajratamiz
-                        {
-                            result.Add(number); // ❗️ YAXLITLAMAYMIZ!
-                        }
-                    }
+                    numbers.Add(Math.Round(num, 3));
                 }
             }
-
-            return result.ToArray();
         }
+
+        return numbers.ToArray();
     }
 }
+
