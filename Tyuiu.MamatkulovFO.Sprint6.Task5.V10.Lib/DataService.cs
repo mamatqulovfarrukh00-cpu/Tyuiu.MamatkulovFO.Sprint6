@@ -48,7 +48,11 @@ namespace Tyuiu.MamatkulovFO.Sprint6.Task5.V10.Lib
                     Console.WriteLine($"{sign} {num:F3} |{bar}");
                 }
             }
-        
+
+        public double[] RoundToThreeDecimals(double[] input)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
 
