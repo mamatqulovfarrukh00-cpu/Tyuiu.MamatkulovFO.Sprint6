@@ -1,41 +1,45 @@
 ﻿using System.Collections;
 using System.Globalization;
+using System.IO;
 using tyuiu.cources.programming.interfaces.Sprint6;
 namespace Tyuiu.MamatkulovFO.Sprint6.Task5.V10.Lib
 {
     public class DataService : ISprint6Task5V10
     {
+        private string? path;
+
         public ICollection? LoadDataFromFile(string v)
         {
-            throw new NotImplementedException();
-        }
-
-        public double[] LoadFromDataFile(string path)
-        {
             if (!File.Exists(path))
-                throw new FileNotFoundException("Fayl topilmadi: " + path);
+                throw new FileNotFoundException("Файл не найден: " + path);
 
             var numbers = new List<double>();
             var lines = File.ReadAllLines(path);
 
             foreach (var line in lines)
             {
-                var clean = line.Trim().Replace('.', ','); 
+                string clean = line.Trim().Replace('.', ',');
                 if (double.TryParse(clean, NumberStyles.Float, CultureInfo.InvariantCulture, out double num))
                 {
                     if (num != 0)
                     {
-                      
-                        double rounded = Math.Round(num, 3);
-                        numbers.Add(rounded);
+                        numbers.Add(Math.Round(num, 3));
                     }
                 }
             }
 
-            return numbers.ToArray();
+            return numbers;
+        }
+
+        public double[] LoadFromDataFile(string path)
+        {
+            throw new NotImplementedException();
         }
     }
-}
+}    
+
+   
+
         
     
 
