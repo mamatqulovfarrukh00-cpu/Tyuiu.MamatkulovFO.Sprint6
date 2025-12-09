@@ -7,6 +7,7 @@ namespace Tyuiu.MamatkulovFO.Sprint6.Task5.V10.Lib
     
         
         
+
             public double[] LoadFromDataFile(string path)
             {
                 if (!File.Exists(path))
@@ -17,7 +18,7 @@ namespace Tyuiu.MamatkulovFO.Sprint6.Task5.V10.Lib
 
                 foreach (var line in lines)
                 {
-                    string cleanedLine = line.Trim().Replace(',', '.');
+                    string cleanedLine = line.Trim().Replace(',', '.'); 
                     if (double.TryParse(cleanedLine, out double number))
                     {
                         numbers.Add(number);
@@ -32,18 +33,15 @@ namespace Tyuiu.MamatkulovFO.Sprint6.Task5.V10.Lib
                 return data.Where(x => x != 0).ToArray();
             }
 
-            public double[] RoundToThreeDecimals(double[] data)
-            {
-                return data.Select(x => Math.Round(x, 3)).ToArray();
-            }
+          
 
             public void PrintAsChart(double[] data)
             {
                 Console.WriteLine("\n📊 Grafik (simvolli chiziq):");
                 foreach (var num in data)
                 {
-                    int barLength = (int)Math.Abs(num); 
-                    if (barLength > 50) barLength = 50; 
+                    int barLength = (int)Math.Abs(num);
+                    if (barLength > 50) barLength = 50;
 
                     string sign = num >= 0 ? "+" : "-";
                     string bar = new string('#', barLength);
