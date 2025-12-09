@@ -1,34 +1,41 @@
-﻿using System.Globalization;
+﻿using System.Collections;
+using System.Globalization;
 using tyuiu.cources.programming.interfaces.Sprint6;
-namespace Tyuiu.MamatkulovFO.Sprint6.Task5.V10.Lib;
-
-public class Dataservice : ISprint6Task5V10
+namespace Tyuiu.MamatkulovFO.Sprint6.Task5.V10.Lib
 {
-   
-
-    public double[] LoadFromDataFile(string path)
+    public class DataService : ISprint6Task5V10
     {
-        if (!File.Exists(path))
-            throw new FileNotFoundException("Fayl topilmadi: " + path);
-
-        var numbers = new List<double>();
-        var lines = File.ReadAllLines(path);
-
-        foreach (var line in lines)
+        public ICollection? LoadDataFromFile(string v)
         {
-            var clean = line.Trim().Replace('.', ','); // . → ,
-            if (double.TryParse(clean, NumberStyles.Float, CultureInfo.InvariantCulture, out double num))
-            {
-                if (num != 0)
-                {
-                    
-                    double rounded = Math.Round(num, 3);
-                    numbers.Add(rounded);
-                }
-            }
+            throw new NotImplementedException();
         }
 
-        return numbers.ToArray();
+        public double[] LoadFromDataFile(string path)
+        {
+            if (!File.Exists(path))
+                throw new FileNotFoundException("Fayl topilmadi: " + path);
+
+            var numbers = new List<double>();
+            var lines = File.ReadAllLines(path);
+
+            foreach (var line in lines)
+            {
+                var clean = line.Trim().Replace('.', ','); 
+                if (double.TryParse(clean, NumberStyles.Float, CultureInfo.InvariantCulture, out double num))
+                {
+                    if (num != 0)
+                    {
+                      
+                        double rounded = Math.Round(num, 3);
+                        numbers.Add(rounded);
+                    }
+                }
+            }
+
+            return numbers.ToArray();
+        }
     }
 }
+        
+    
 

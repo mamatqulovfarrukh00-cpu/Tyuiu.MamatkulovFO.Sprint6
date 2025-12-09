@@ -1,5 +1,4 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Sprint6Task5.Tests;
 using Tyuiu.MamatkulovFO.Sprint6.Task5.V10.Lib;
 
 namespace Tyuiu.MamatkulovFO.Sprint6.Task5.V10.Tests
@@ -20,7 +19,7 @@ namespace Tyuiu.MamatkulovFO.Sprint6.Task5.V10.Tests
                 13.66, 0.48, 4.13, -0.11, 19.0, -17.36, 11.0, 11.28, -12.0, -12.35
             };
 
-            CollectionAssert.AreEqual(expected, (System.Collections.ICollection?)res);
+            CollectionAssert.AreEqual(expected, res);
         }
     }
 }

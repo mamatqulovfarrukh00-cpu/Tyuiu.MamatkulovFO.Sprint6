@@ -1,17 +1,30 @@
 ﻿using System;
-using System.Windows.Forms;
-using Tyuiu.MamatkulovFO.Sprint6.Task5.V10;
+using System.Linq;
+using Tyuiu.MamatkulovFO.Sprint6.Task5.V10.Lib;
 
-namespace Sprint6Task5
+namespace Tyuiu.MamatkulovFO.Sprint6.Task5.V10
 {
     internal static class Program
     {
-        [STAThread]
-        static void Main()
+        private static bool result;
+
+        static void Main(string[] args)
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            var service = new DataService();
+            try
+            {
+                var data = service.LoadDataFromFile("InPutDataFileTask5V10.txt");
+
+                // Выводим массив в виде: [-13.0, -19.0, -9.82, ...]
+              
+                Console.WriteLine(result);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Ошибка: " + ex.Message);
+            }
+
+            Console.ReadKey(); // Ожидание нажатия клавиши
         }
     }
 }
