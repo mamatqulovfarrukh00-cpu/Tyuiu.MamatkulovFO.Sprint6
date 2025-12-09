@@ -1,45 +1,56 @@
-﻿using System.Collections;
-using System.Globalization;
-using System.IO;
-using tyuiu.cources.programming.interfaces.Sprint6;
+﻿using tyuiu.cources.programming.interfaces.Sprint6;
 namespace Tyuiu.MamatkulovFO.Sprint6.Task5.V10.Lib
 {
     public class DataService : ISprint6Task5V10
     {
-        private string? path;
 
-        public ICollection? LoadDataFromFile(string v)
-        {
-            if (!File.Exists(path))
-                throw new FileNotFoundException("Файл не найден: " + path);
-
-            var numbers = new List<double>();
-            var lines = File.ReadAllLines(path);
-
-            foreach (var line in lines)
+    
+        
+        
+            public double[] LoadFromDataFile(string path)
             {
-                string clean = line.Trim().Replace('.', ',');
-                if (double.TryParse(clean, NumberStyles.Float, CultureInfo.InvariantCulture, out double num))
+                if (!File.Exists(path))
+                    throw new FileNotFoundException("Fayl topilmadi.", path);
+
+                var lines = File.ReadAllLines(path);
+                var numbers = new List<double>();
+
+                foreach (var line in lines)
                 {
-                    if (num != 0)
+                    string cleanedLine = line.Trim().Replace(',', '.');
+                    if (double.TryParse(cleanedLine, out double number))
                     {
-                        numbers.Add(Math.Round(num, 3));
+                        numbers.Add(number);
                     }
                 }
+
+                return numbers.ToArray();
             }
 
-            return numbers;
-        }
+            public double[] FilterNonZero(double[] data)
+            {
+                return data.Where(x => x != 0).ToArray();
+            }
 
-        public double[] LoadFromDataFile(string path)
-        {
-            throw new NotImplementedException();
-        }
-    }
-}    
+            public double[] RoundToThreeDecimals(double[] data)
+            {
+                return data.Select(x => Math.Round(x, 3)).ToArray();
+            }
 
-   
+            public void PrintAsChart(double[] data)
+            {
+                Console.WriteLine("\n📊 Grafik (simvolli chiziq):");
+                foreach (var num in data)
+                {
+                    int barLength = (int)Math.Abs(num); 
+                    if (barLength > 50) barLength = 50; 
 
+                    string sign = num >= 0 ? "+" : "-";
+                    string bar = new string('#', barLength);
+                    Console.WriteLine($"{sign} {num:F3} |{bar}");
+                }
+            }
         
-    
+    }
+}
 

@@ -1,30 +1,51 @@
 ﻿using System;
-using System.Linq;
 using Tyuiu.MamatkulovFO.Sprint6.Task5.V10.Lib;
 
 namespace Tyuiu.MamatkulovFO.Sprint6.Task5.V10
 {
-    internal static class Program
+    class Program
     {
-        private static bool result;
-
         static void Main(string[] args)
         {
+            Console.WriteLine("");
+            Console.WriteLine("========================================================");
+
+            string filePath = "InPutDataFileTask5V10.txt";
+
             var service = new DataService();
+
             try
             {
-                var data = service.LoadDataFromFile("InPutDataFileTask5V10.txt");
+               
+                double[] allNumbers = service.LoadFromDataFile(filePath);
+                Console.WriteLine($"✅ Fayldan o'qildi: {allNumbers.Length} ta son");
 
-                // Выводим массив в виде: [-13.0, -19.0, -9.82, ...]
-              
-                Console.WriteLine(result);
+                // 2. Nolga teng bo'lmaganlarni filtrlash
+                double[] nonZeroNumbers = service.FilterNonZero(allNumbers);
+                Console.WriteLine($"✅ Nolga teng emaslar: {nonZeroNumbers.Length} ta son");
+
+                // 3. 3 xonagacha yaxlitlash
+                double[] roundedNumbers = service.RoundToThreeDecimals(nonZeroNumbers);
+
+                // 4. Chiqarish
+                Console.WriteLine("\n):");
+                foreach (var num in roundedNumbers)
+                {
+                    Console.WriteLine(num);
+                }
+
+                // 5. Grafik chizish
+                service.PrintAsChart(roundedNumbers);
+
+                Console.WriteLine("\n!");
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Ошибка: " + ex.Message);
+                Console.WriteLine($": {ex.Message}");
             }
 
-            Console.ReadKey(); // Ожидание нажатия клавиши
+            Console.WriteLine("\n...");
+            Console.ReadKey();
         }
     }
 }
