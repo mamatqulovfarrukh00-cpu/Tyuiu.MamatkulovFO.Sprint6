@@ -16,13 +16,14 @@ public class Dataservice : ISprint6Task5V10
 
         foreach (var line in lines)
         {
-           
-            var clean = line.Trim().Replace('.', ',');
+            var clean = line.Trim().Replace('.', ','); // . → ,
             if (double.TryParse(clean, NumberStyles.Float, CultureInfo.InvariantCulture, out double num))
             {
-                if (num != 0) 
+                if (num != 0)
                 {
-                    numbers.Add(Math.Round(num, 3)); 
+                    
+                    double rounded = Math.Round(num, 3);
+                    numbers.Add(rounded);
                 }
             }
         }
