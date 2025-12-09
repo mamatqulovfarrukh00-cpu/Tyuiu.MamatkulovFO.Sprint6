@@ -1,17 +1,18 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Sprint6Task5;
+using Sprint6Task5.Tests;
+using Tyuiu.MamatkulovFO.Sprint6.Task5.V10;
 
-namespace Sprint6Task5.Tests
+namespace Tyuiu.MamatkulovFO.Sprint6.Task5.V10.Tests
 {
     [TestClass]
     public class DataServiceTest
     {
         [TestMethod]
-        public void LoadDataFromFile_ReturnsCorrectCount()
+        public void LoadDataFromFile_ShouldReturn20NonZeroNumbers()
         {
             var service = new DataService();
-            var data = service.LoadDataFromFile("InPutDataFileTask5V10.txt");
-           
+            var result = service.LoadDataFromFile("InPutDataFileTask5V10.txt");
+            
         }
     }
 }
