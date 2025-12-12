@@ -1,49 +1,49 @@
 ﻿using System;
+
 using Tyuiu.MamatkulovFO.Sprint6.Task5.V10.Lib;
 
-namespace Tyuiu.MamatkulovFO.Sprint6.Task5.V10
+namespace Tyuiu.mamatkulovFO.Sprint6.Task5.V10
 {
     class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("📌 Sprint6 Task5 V10 - Ma'lumotlarni o'qish va grafik chizish");
-            Console.WriteLine("========================================================");
+            Console.Title = "Спринт 6 | Задание 5 | Вариант 10 | Маматкулов Ф.О.";
+            Console.WriteLine("==========================================================================");
+            Console.WriteLine("* Спринт #6                                                              *");
+            Console.WriteLine("* Тема: Работа с файлами и массивами                                     *");
+            Console.WriteLine("* Задание #5                                                             *");
+            Console.WriteLine("* Вариант #10                                                            *");
+            Console.WriteLine("* Выполнил: Маматкулов Фаррух Охунжонович                                *");
+            Console.WriteLine("==========================================================================");
+            Console.WriteLine("* УСЛОВИЕ:                                                               *");
+            Console.WriteLine("* Написать программу, которая считывает данные из текстового файла        *");
+            Console.WriteLine("* и возвращает массив чисел, не равных нулю.                             *");
+            Console.WriteLine("==========================================================================");
 
-            string filePath = "InPutDataFileTask5V10.txt";
-
-            var service = new DataService();
+            // Fayl nomi (fayl dastur ishlayotgan papkada bo'lishi kerak)
+            string filePath = @"InPutDataFileTask5V10.txt";
+            DataService ds = new DataService();
 
             try
             {
-                // 1. Fayldan o'qish
-                double[] allNumbers = service.LoadFromDataFile(filePath);
-                Console.WriteLine($"✅ Fayldan o'qildi: {allNumbers.Length} ta son");
+                double[] result = ds.LoadFromDataFile(filePath);
 
-                // 2. Nolga teng bo'lmaganlarni filtrlash
-                double[] nonZeroNumbers = service.FilterNonZero(allNumbers);
-                Console.WriteLine($"✅ Nolga teng emaslar: {nonZeroNumbers.Length} ta son");
-
-                // 3. 👇 YAXLITLASHNI OLIB TASHLADIK — TESTGA MOSLIK UCHUN
-
-                // 4. Chiqarish (asli formatda, yaxlitlanmagan)
-                Console.WriteLine("\n🔢 Nolga teng bo'lmagan sonlar (asli formatda):");
-                foreach (var num in nonZeroNumbers)
+                Console.WriteLine("\nМАССИВ ЧИСЕЛ, НЕ РАВНЫХ НУЛЮ:");
+                for (int i = 0; i < result.Length; i++)
                 {
-                    Console.WriteLine(num);
+                    // Sonlarni 2 xonali kasr bilan chiqarish (masalan: -9.82)
+                    Console.WriteLine($"{result[i]:F2}");
                 }
-
-                // 5. Grafik chizish (bu yerda ham yaxlitlash yo'q, lekin konsolda ko'rinish uchun F3 ishlatiladi)
-                service.PrintAsChart(nonZeroNumbers);
-
-                Console.WriteLine("\n🎉 Vazifa muvaffaqiyatli bajarildi!");
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"❌ Xato: {ex.Message}");
+                Console.WriteLine($"\nОШИБКА: Не удалось прочитать файл '{filePath}'.");
+                Console.WriteLine($"Причина: {ex.Message}");
             }
 
-            Console.WriteLine("\nQoldirish uchun istalgan tugmani bosing...");
+            Console.WriteLine("\n==========================================================================");
+            Console.WriteLine("Для выхода нажмите любую клавишу...");
             Console.ReadKey();
         }
     }

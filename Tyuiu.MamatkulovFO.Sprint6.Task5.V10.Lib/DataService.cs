@@ -3,55 +3,29 @@ namespace Tyuiu.MamatkulovFO.Sprint6.Task5.V10.Lib
 {
     public class DataService : ISprint6Task5V10
     {
+        public double[] LoadFromDataFile(string path)
+        {
+            // Fayldan barcha qatorlarni o'qish
+            string[] lines = File.ReadAllLines(path);
 
-    
-        
-        
+            // Nolga teng bo'lmagan sonlarni saqlash uchun list
+            var numbers = new System.Collections.Generic.List<double>();
 
-            public double[] LoadFromDataFile(string path)
+            foreach (string line in lines)
             {
-                if (!File.Exists(path))
-                    throw new FileNotFoundException("Fayl topilmadi.", path);
-
-                var lines = File.ReadAllLines(path);
-                var numbers = new List<double>();
-
-                foreach (var line in lines)
+                // Har bir qatorni double ga aylantirishga harakat qilish
+                if (double.TryParse(line, out double value))
                 {
-                    string cleanedLine = line.Trim().Replace(',', '.'); 
-                    if (double.TryParse(cleanedLine, out double number))
+                    // Agar qiymat nolga teng bo'lmasa, ro'yxatga qo'shish
+                    if (value != 0)
                     {
-                        numbers.Add(number);
+                        numbers.Add(value);
                     }
                 }
-
-                return numbers.ToArray();
             }
 
-            public double[] FilterNonZero(double[] data)
-            {
-                return data.Where(x => x != 0).ToArray();
-            }
-
-          
-
-            public void PrintAsChart(double[] data)
-            {
-                Console.WriteLine("\n📊 Grafik (simvolli chiziq):");
-                foreach (var num in data)
-                {
-                    int barLength = (int)Math.Abs(num);
-                    if (barLength > 50) barLength = 50;
-
-                    string sign = num >= 0 ? "+" : "-";
-                    string bar = new string('#', barLength);
-                    Console.WriteLine($"{sign} {num:F3} |{bar}");
-                }
-            }
-
-        public double[] RoundToThreeDecimals(double[] input)
-        {
-            throw new NotImplementedException();
+            // Natijani massiv sifatida qaytarish
+            return numbers.ToArray();
         }
     }
 }
